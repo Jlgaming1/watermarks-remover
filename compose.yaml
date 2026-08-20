@@ -64,8 +64,9 @@ services:
     volumes:
       - markllm-cache:/home/markllm/.cache/huggingface
       # Writable output for the benchmark + the bundled seed corpus (the
-      # build context is service/, so the corpus is mounted at runtime):
-      #   docker compose run --rm wr-markllm \
+      # build context is service/, so the corpus is mounted at runtime).
+      # The entrypoint is detect_text_watermark.py, so override it:
+      #   docker compose run --rm --entrypoint python3 wr-markllm \
       #     /app/bench_synthid_text.py --markllm-dir /opt/markllm \
       #     --corpus /bench-corpus --out-dir /data ...
       - bench-out:/data
